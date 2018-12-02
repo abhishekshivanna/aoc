@@ -1,4 +1,4 @@
-package problem.day01;
+package aoc2018.problem.day01;
 
 import java.io.File;
 import java.io.FileNotFoundException;
