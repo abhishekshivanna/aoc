@@ -7,15 +7,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Day02 {
+class Day02 {
 
     private final File inputFile;
 
-    public Day02(File inputFile) {
+    Day02(File inputFile) {
         this.inputFile = inputFile;
     }
 
-    Pair<Boolean, Boolean> twoThreeExists(String line) {
+    private Pair<Boolean, Boolean> twoThreeExists(String line) {
         boolean two=false, three=false;
         int f;
         Map<Character, Integer> charFreq = new HashMap<>();
@@ -36,7 +36,7 @@ public class Day02 {
         return new Pair<>(two, three);
     }
 
-    String getCommonPart(String s1, String s2) {
+    private String getCommonPart(String s1, String s2) {
         StringBuilder sb = new StringBuilder();
         int min_len = Math.min(s1.length(), s2.length());
         for (int i=0; i<min_len; i++) {
@@ -47,7 +47,7 @@ public class Day02 {
         return sb.toString();
     }
 
-    int part1() throws FileNotFoundException {
+    int part1() {
         int twoCount=0, threeCount=0;
         Pair<Boolean, Boolean> p;
         try (Scanner sc = new Scanner(this.inputFile)) {
@@ -56,16 +56,20 @@ public class Day02 {
                 if (p.fst) twoCount++;
                 if (p.snd) threeCount++;
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
         return twoCount * threeCount;
     }
 
-    String part2() throws FileNotFoundException {
+    String part2() {
         List<String> ids = new ArrayList<>();
         try (Scanner sc = new Scanner(this.inputFile)) {
             while (sc.hasNextLine()) {
                 ids.add(sc.nextLine());
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
         for(int i=0; i<ids.size(); i++) {
             for(int j=i+1; j<ids.size(); j++) {

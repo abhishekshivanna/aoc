@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Day01Test {
     @Test
-    public void shouldGiveSumOfNumbers() throws FileNotFoundException {
+    public void shouldGiveSumOfNumbers() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("day01/test_input").getFile());
         Day01 day01 = new Day01(file);
@@ -16,7 +16,7 @@ public class Day01Test {
     }
 
     @Test
-    public void shouldReturnFirstRepeatSum() throws FileNotFoundException {
+    public void shouldReturnFirstRepeatSum() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("day01/test_input").getFile());
         Day01 day01 = new Day01(file);

@@ -4,13 +4,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 
 public class Day02Test {
 
     @Test
-    public void shouldReturnCheckSum() throws FileNotFoundException {
+    public void shouldReturnCheckSum() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("day02/test_input_1").getFile());
         Day02 day02 = new Day02(file);
@@ -18,7 +17,7 @@ public class Day02Test {
     }
 
     @Test
-    public void shouldReturnCommonPartsOfStringsWithEditDistanceOf1() throws FileNotFoundException {
+    public void shouldReturnCommonPartsOfStringsWithEditDistanceOf1() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("day02/test_input_2").getFile());
         Day02 day02 = new Day02(file);
