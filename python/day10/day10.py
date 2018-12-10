@@ -16,6 +16,12 @@ def get_input(in_file):
     return points, velocity
 
 
+def compute_area_of_positive_grid(points):
+    max_x = max([point[0] for point in points])
+    max_y = max([point[1] for point in points])
+    return max_x * max_y
+
+
 def compute_grid(points, should_print=False):
     min_x = min([point[0] for point in points])
     max_x = max([point[0] for point in points])
@@ -24,11 +30,16 @@ def compute_grid(points, should_print=False):
 
     grid_offset = (min_x, min_y)
 
-    grid = [[0 for _ in range(max_y - min_y + 1)] for _ in range(max_x - min_x + 1)]
+    offset_points = []
     for point in points:
-        grid[point[0] - grid_offset[0]][point[1] - grid_offset[1]] = '#'
+        offset_points.append((point[0] - grid_offset[0], point[1] - grid_offset[1]))
+
+    grid_area = compute_area_of_positive_grid(offset_points)
 
     if should_print:
+        grid = [['-' for _ in range(max_y - min_y + 1)] for _ in range(max_x - min_x + 1)]
+        for point in offset_points:
+            grid[point[0]][point[1]] = '#'
         for y in range(max_y - min_y + 1):
             row = []
             for x in range(max_x - min_x + 1):
@@ -36,7 +47,7 @@ def compute_grid(points, should_print=False):
             print(" ".join(row))
         print("")
 
-    return grid
+    return grid_area
 
 
 def mutate_points(points, velocity, reverse=False):
@@ -49,29 +60,24 @@ def mutate_points(points, velocity, reverse=False):
     return mutated_points
 
 
-def part1(points, velocity):
-    grid = compute_grid(points)
+def solve(points, velocity):
+    current_area = compute_grid(points)
     previous_area = 999999999999
-    current_area = len(grid) * len(grid[0])
     iterations = 0
     while current_area < previous_area:
-        print("p:{0}, c:{1}".format(previous_area, current_area))
-
         iterations += 1
-        if iterations % 10000 == 0:
-            print(iterations)
         previous_area = current_area
         points = mutate_points(points, velocity)
-        grid = compute_grid(points)
-        current_area = len(grid) * len(grid[0])
+        current_area = compute_grid(points)
 
     points = mutate_points(points, velocity, reverse=True)
     compute_grid(points, should_print=True)
+    print(iterations - 1)
 
 
 def main():
     points, velocity = get_input(in_file)
-    part1(points, velocity)
+    solve(points, velocity)
 
 
 main()
