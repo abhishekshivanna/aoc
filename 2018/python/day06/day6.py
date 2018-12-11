@@ -1,8 +1,9 @@
-
 from collections import Counter
+
 size = 500
 inp = 'input'
 part2_size = 10000
+
 
 # size = 10
 # inp = 'test_input'
@@ -17,6 +18,7 @@ def build_grid():
         grid.append(li)
     return grid
 
+
 def get_input(filename):
     points = []
     with open(filename) as f:
@@ -26,6 +28,7 @@ def get_input(filename):
 
     return points
 
+
 def insert_points(points, grid):
     marker = 1
     for x, y in points:
@@ -33,6 +36,7 @@ def insert_points(points, grid):
         marker += 1
 
     return grid
+
 
 def manhattan_distance(src, dest):
     return abs(src[0] - dest[0]) + abs(src[1] - dest[1])
@@ -49,17 +53,18 @@ def compute(point, grid, marker):
             if dist == grid[x][y]['dist'] and grid[x][y]['marker'] != marker:
                 grid[x][y]['marker'] = '.'
 
+
 def border_markers(grid):
     border = set()
-    for x in range(len(grid)): # left
+    for x in range(len(grid)):  # left
         border.add(grid[x][0]['marker'])
-    for x in range(len(grid)): # top
+    for x in range(len(grid)):  # top
         border.add(grid[0][x]['marker'])
 
-    for x in range(len(grid)): # right
-        border.add(grid[x][len(grid)-1]['marker'])
-    for x in range(len(grid)): # bottom
-        border.add(grid[len(grid)-1][x]['marker'])
+    for x in range(len(grid)):  # right
+        border.add(grid[x][len(grid) - 1]['marker'])
+    for x in range(len(grid)):  # bottom
+        border.add(grid[len(grid) - 1][x]['marker'])
 
     return border
 
@@ -93,6 +98,7 @@ def part1(grid):
     # print(counts)
     return max(counts.values())
 
+
 def part2(grid):
     count = 0
     for x in range(len(grid)):
@@ -112,5 +118,6 @@ def main():
         # print_grid(grid)
     print(part1(grid))
     print(part2(grid))
+
 
 main()

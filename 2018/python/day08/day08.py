@@ -32,7 +32,7 @@ class Node(object):
         for i in self.meta:
             # print("Node: {0}, meta_index: {1}".format(self.name, i))
             try:
-                val += self.children[i-1].node_value()  # grr.. 1 indexed.. should have seen this sooner.
+                val += self.children[i - 1].node_value()  # grr.. 1 indexed.. should have seen this sooner.
             except:
                 continue
         return val
